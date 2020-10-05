@@ -131,7 +131,8 @@ struct
   let handle_shutdown_request ~parent shell body =
     let%lwt () = SHELL_SHUTDOWN_REP body
       |> ShellChannel.reply shell ~parent in
-    ShellChannel.close shell
+    let%lwt () = ShellChannel.close shell in
+    app (fun pp -> pp "Closed channel...")
 
   let handle_execute_request ~parent client body =
     client.execution_count <- succ client.execution_count ;

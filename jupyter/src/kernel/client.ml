@@ -298,5 +298,5 @@ struct
       start_kernel client client.control;
       heartbeat client;
     ] >|= fun () ->
-    app (fun pp -> pp "OCaml kernel main loop is exited.")
+            app (fun pp -> pp "OCaml kernel main loop is exited.")
 end

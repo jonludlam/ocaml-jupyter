@@ -61,8 +61,10 @@ let () =
     try
       Lwt_main.run begin
         let%lwt () = client_thread in
+        app (fun pp -> pp "here we are...");
         Client.close client
-      end
+      end;
+
     with
     | Sys.Break ->
       Jupyter_repl.Process.interrupt repl ;

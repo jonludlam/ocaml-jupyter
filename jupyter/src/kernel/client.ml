@@ -129,8 +129,9 @@ struct
     send_iopub_status ~parent client IOPUB_IDLE
 
   let handle_shutdown_request ~parent shell body =
-    SHELL_SHUTDOWN_REP body
-    |> ShellChannel.reply shell ~parent
+    let%lwt () = SHELL_SHUTDOWN_REP body
+      |> ShellChannel.reply shell ~parent in
+    ShellChannel.close shell
 
   let handle_execute_request ~parent client body =
     client.execution_count <- succ client.execution_count ;

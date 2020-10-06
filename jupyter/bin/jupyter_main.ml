@@ -74,4 +74,5 @@ let () =
       raise e
   in
   main () ;
+  app (fun pp -> pp "Finishing...");
   Zmq.Context.terminate ctx

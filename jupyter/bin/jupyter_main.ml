@@ -37,6 +37,8 @@ module Client =
     (Jupyter_repl.Process)(Jupyter_completor.Merlin)
 
 let () =
+  ignore (Unix.setsid ());
+
   Printexc.record_backtrace true ;
   Jupyter_args.parse () ;
   (* Fork OCaml REPL before starting a server!
